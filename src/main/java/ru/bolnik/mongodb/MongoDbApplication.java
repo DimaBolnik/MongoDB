@@ -1,5 +1,6 @@
 package ru.bolnik.mongodb;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,23 +10,54 @@ import ru.bolnik.mongodb.entity.Planet;
 import ru.bolnik.mongodb.repository.CometRepository;
 import ru.bolnik.mongodb.repository.PlanetRepository;
 
-import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootApplication
 public class MongoDbApplication implements CommandLineRunner {
 
-    @Autowired
+
     private PlanetRepository planetRepository;
-    @Autowired
+
     private CometRepository cometRepository;
 
+    public MongoDbApplication(PlanetRepository planetRepository, CometRepository cometRepository) {
+        this.planetRepository = planetRepository;
+        this.cometRepository = cometRepository;
+    }
+
     public static void main(String[] args) {
+        Dotenv dotenv = Dotenv.load();
+        System.setProperty("MONGODB_URI", dotenv.get("MONGODB_URI"));
         SpringApplication.run(MongoDbApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+//        // Найти комету по текущему имени
+//        String oldName = "Halley";
+//        String newName = "New Halley";
+//
+//        // Ищем комету
+//        Optional<Comet> cometOpt = cometRepository.findByName(oldName);
+//
+//        if (cometOpt.isPresent()) {
+//            Comet comet = cometOpt.get();
+//            // Меняем название
+//            comet.setName(newName);
+//            // Сохраняем обратно
+//            cometRepository.save(comet);
+//            System.out.println("Комета обновлена: " + comet);
+//        } else {
+//            System.out.println("Комета с именем " + oldName + " не найдена");
+//        }
+
+
+        List<Comet> comets = cometRepository.findAll();
+
+        comets.forEach(pl -> System.out.println(pl.getName()));
+
 
 //        // Создаём новую планету
 //        Planet fakePlanet = new Planet();
@@ -101,9 +133,6 @@ public class MongoDbApplication implements CommandLineRunner {
 //
 //        System.out.println("Кометы успешно добавлены!");
 
-        List<Comet> comets = cometRepository.findAll();
-
-        System.out.println(comets);
 
     }
 }
