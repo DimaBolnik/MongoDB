@@ -1,7 +1,8 @@
-package ru.bolnik.mongodb;
+package ru.bolnik.mongodb.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
+import ru.bolnik.mongodb.entity.Planet;
 
 import java.util.List;
 

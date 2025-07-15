@@ -1,15 +1,13 @@
 package ru.bolnik.mongodb;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Filters;
-import org.bson.Document;
-import org.bson.conversions.Bson;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
+import ru.bolnik.mongodb.entity.Comet;
+import ru.bolnik.mongodb.entity.Planet;
+import ru.bolnik.mongodb.repository.CometRepository;
+import ru.bolnik.mongodb.repository.PlanetRepository;
 
 import java.util.Comparator;
 import java.util.List;
@@ -19,6 +17,8 @@ public class MongoDbApplication implements CommandLineRunner {
 
     @Autowired
     private PlanetRepository planetRepository;
+    @Autowired
+    private CometRepository cometRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(MongoDbApplication.class, args);
@@ -44,22 +44,23 @@ public class MongoDbApplication implements CommandLineRunner {
 //        // Сохраняем
 //        planetRepository.save(fakePlanet);
 //        System.out.println("Added fake planet: " + fakePlanet.getName());
-        List<Planet> planets = planetRepository.findByOrderFromSunGreaterThan(2);
-        planets.sort(Comparator.comparing(Planet::getOrderFromSun));
-        for (var planet : planets) {
-            System.out.println("Name: " + planet.getName());
-            System.out.println("Order from Sun: " + planet.getOrderFromSun());
-            System.out.println("Has rings: " + planet.isHasRings());
-            System.out.println("Main atmosphere: " + planet.getMainAtmosphere());
-            var temperature = planet.getSurfaceTemperatureC();
-            if (temperature != null) {
-                System.out.println("Surface temperature (min): " + temperature.getMin());
-                System.out.println("Surface temperature (max): " + temperature.getMax());
-                System.out.println("Surface temperature (avg): " + temperature.getAvg());
-            }
-            System.out.println("-----------------------------");
-        }
-    }
+
+//        List<Planet> planets = planetRepository.findByOrderFromSunGreaterThan(2);
+//        planets.sort(Comparator.comparing(Planet::getOrderFromSun));
+//        for (var planet : planets) {
+//            System.out.println("Name: " + planet.getName());
+//            System.out.println("Order from Sun: " + planet.getOrderFromSun());
+//            System.out.println("Has rings: " + planet.isHasRings());
+//            System.out.println("Main atmosphere: " + planet.getMainAtmosphere());
+//            var temperature = planet.getSurfaceTemperatureC();
+//            if (temperature != null) {
+//                System.out.println("Surface temperature (min): " + temperature.getMin());
+//                System.out.println("Surface temperature (max): " + temperature.getMax());
+//                System.out.println("Surface temperature (avg): " + temperature.getAvg());
+//            }
+//            System.out.println("-----------------------------");
+//        }
+//    }
 //    @Autowired
 //    private MongoTemplate mongoTemplate;
 //
@@ -80,5 +81,29 @@ public class MongoDbApplication implements CommandLineRunner {
 //            }
 //        }
 
-//    }
+        //создание новой коллекции и добавления туда документов
+        // Создаем новые кометы
+//        Comet halley = new Comet();
+//        halley.setName("Halley");
+//        halley.setPerihelion(0.586); // В а.е.
+//        halley.setAphelion(35.1);
+//        halley.setPeriodic(true);
+//
+//        Comet haleBopp = new Comet();
+//        haleBopp.setName("Hale-Bopp");
+//        haleBopp.setPerihelion(0.914);
+//        haleBopp.setAphelion(370);
+//        haleBopp.setPeriodic(true);
+//
+//        // Сохраняем в коллекцию
+//        cometRepository.save(halley);
+//        cometRepository.save(haleBopp);
+//
+//        System.out.println("Кометы успешно добавлены!");
+
+        List<Comet> comets = cometRepository.findAll();
+
+        System.out.println(comets);
+
+    }
 }

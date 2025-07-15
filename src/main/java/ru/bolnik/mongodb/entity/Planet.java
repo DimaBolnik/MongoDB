@@ -1,4 +1,4 @@
-package ru.bolnik.mongodb;
+package ru.bolnik.mongodb.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
