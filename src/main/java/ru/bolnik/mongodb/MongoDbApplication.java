@@ -26,18 +26,36 @@ public class MongoDbApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<Planet> planets = planetRepository.findByOrderFromSunGreaterThan(4);
+
+//        // Создаём новую планету
+//        Planet fakePlanet = new Planet();
+//        fakePlanet.setName("Fantazia");
+//        fakePlanet.setOrderFromSun(15);
+//        fakePlanet.setHasRings(true);
+//        fakePlanet.setMainAtmosphere(List.of("Helium-X"));
+//
+//        // Задаём температуру
+//        Planet.SurfaceTemperature temp = new Planet.SurfaceTemperature();
+//        temp.setMin(-150);
+//        temp.setMax(50);
+//        temp.setAvg(-50);
+//        fakePlanet.setSurfaceTemperatureC(temp);
+//
+//        // Сохраняем
+//        planetRepository.save(fakePlanet);
+//        System.out.println("Added fake planet: " + fakePlanet.getName());
+        List<Planet> planets = planetRepository.findByOrderFromSunGreaterThan(2);
         planets.sort(Comparator.comparing(Planet::getOrderFromSun));
         for (var planet : planets) {
             System.out.println("Name: " + planet.getName());
             System.out.println("Order from Sun: " + planet.getOrderFromSun());
             System.out.println("Has rings: " + planet.isHasRings());
             System.out.println("Main atmosphere: " + planet.getMainAtmosphere());
-            var temp = planet.getSurfaceTemperatureC();
-            if (temp != null) {
-                System.out.println("Surface temp (min): " + temp.getMin());
-                System.out.println("Surface temp (max): " + temp.getMax());
-                System.out.println("Surface temp (avg): " + temp.getAvg());
+            var temperature = planet.getSurfaceTemperatureC();
+            if (temperature != null) {
+                System.out.println("Surface temperature (min): " + temperature.getMin());
+                System.out.println("Surface temperature (max): " + temperature.getMax());
+                System.out.println("Surface temperature (avg): " + temperature.getAvg());
             }
             System.out.println("-----------------------------");
         }
