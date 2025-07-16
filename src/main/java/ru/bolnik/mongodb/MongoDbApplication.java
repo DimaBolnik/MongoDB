@@ -53,6 +53,7 @@ public class MongoDbApplication implements CommandLineRunner {
 //            System.out.println("Комета с именем " + oldName + " не найдена");
 //        }
 
+        cometRepository.deleteByName("New Halley");
 
         List<Comet> comets = cometRepository.findAll();
 

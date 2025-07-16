@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface CometRepository extends MongoRepository<Comet, String> {
     Optional<Comet> findByName(String name);
+
+    void deleteByName(String name);
 }
