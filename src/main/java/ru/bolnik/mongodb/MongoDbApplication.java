@@ -53,7 +53,7 @@ public class MongoDbApplication implements CommandLineRunner {
 //            System.out.println("Комета с именем " + oldName + " не найдена");
 //        }
 
-        cometRepository.deleteByName("New Halley");
+//        cometRepository.deleteByName("Тралолейло");
 
         List<Comet> comets = cometRepository.findAll();
 
@@ -117,13 +117,13 @@ public class MongoDbApplication implements CommandLineRunner {
         //создание новой коллекции и добавления туда документов
         // Создаем новые кометы
 //        Comet halley = new Comet();
-//        halley.setName("Halley");
+//        halley.setName("Тралолейло");
 //        halley.setPerihelion(0.586); // В а.е.
 //        halley.setAphelion(35.1);
 //        halley.setPeriodic(true);
 //
 //        Comet haleBopp = new Comet();
-//        haleBopp.setName("Hale-Bopp");
+//        haleBopp.setName("БамбордироКрокодило");
 //        haleBopp.setPerihelion(0.914);
 //        haleBopp.setAphelion(370);
 //        haleBopp.setPeriodic(true);
@@ -131,8 +131,8 @@ public class MongoDbApplication implements CommandLineRunner {
 //        // Сохраняем в коллекцию
 //        cometRepository.save(halley);
 //        cometRepository.save(haleBopp);
-//
-//        System.out.println("Кометы успешно добавлены!");
+//        comets.forEach(pl -> System.out.println(pl.getName()));
+        System.out.println("Кометы успешно добавлены!");
 
 
     }
